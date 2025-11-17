@@ -1,0 +1,237 @@
+<section>
+  <div class="container">
+    <h2 class="text-center my-4">Add New Product</h2>
+    <form [formGroup]="addProductForm" (ngSubmit)="submitForm()">
+     <!-- Product Name in English -->
+      <div class="mb-3">
+        <!-- @let nameEn = addProductForm.get('nameEn'); -->
+        <label for="exampleFormControlInput1" class="form-label"
+          >English Product Name</label
+        >
+        <input
+          formControlName="nameEn"
+          type="text"
+          class="form-control"
+          id="exampleFormControlInput1"
+          placeholder="English Product Name"
+        />
+
+        @if (addProductForm.get('nameEn')?.touched &&
+        addProductForm.get('nameEn')?.errors) {
+        <div
+          class="alert alert-danger d-flex align-items-start mt-2"
+          role="alert"
+        >
+          <!-- Smaller, clean SVG icon (Bootstrap style) -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="18"
+            height="18"
+            fill="currentColor"
+            class="bi bi-exclamation-circle me-2 mt-1"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+            />
+            <path
+              d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.55.55 0 0 1-1.1 0L7.1 4.995z"
+            />
+          </svg>
+
+          <div>
+            <ul class="mb-0 ps-3">
+              @if (addProductForm.get('nameEn')?.getError('required')) {
+              <li>Name is required</li>
+              } @if (addProductForm.get('nameEn')?.getError('minlength')) {
+              <li>Name must be at least 3 characters</li>
+              }
+            </ul>
+          </div>
+        </div>
+        }
+      </div>
+
+      <!-- Product Name in Arabic -->
+      <div class="mb-3">
+  <label class="form-label">Arabic Product Name</label>
+
+  <input
+    type="text"
+    formControlName="nameAr"
+    class="form-control"
+    placeholder="Arabic Product Name"
+  />
+
+  @if (addProductForm.get('nameAr')?.touched && addProductForm.get('nameAr')?.invalid) {
+    <div class="alert alert-danger d-flex align-items-start mt-2" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+        fill="currentColor" class="bi bi-exclamation-circle me-2 mt-1"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.55.55 0 0 1-1.1 0L7.1 4.995z"/>
+      </svg>
+
+      <div>
+        <ul class="mb-0 ps-3">
+          @if (addProductForm.get('nameAr')?.getError('required')) {
+            <li>Arabic name is required</li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- English description  -->
+ <div class="mb-3">
+  <label class="form-label">English Description</label>
+
+  <textarea
+    formControlName="descriptionEn"
+    rows="3"
+    class="form-control"
+    placeholder="English Description"
+  ></textarea>
+
+  @if (addProductForm.get('descriptionEn')?.touched && addProductForm.get('descriptionEn')?.invalid) {
+    <div class="alert alert-danger d-flex align-items-start mt-2" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+        fill="currentColor" class="bi bi-exclamation-circle me-2 mt-1"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.55.55 0 0 1-1.1 0L7.1 4.995z"/>
+      </svg>
+
+      <div>
+        <ul class="mb-0 ps-3">
+          @if (addProductForm.get('descriptionEn')?.getError('required')) {
+            <li>Description is required</li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+
+
+<!-- Arabic description  -->
+
+<div class="mb-3">
+  <label class="form-label">Arabic Description</label>
+
+  <textarea
+    formControlName="descriptionAr"
+    rows="3"
+    class="form-control"
+    placeholder="Arabic Description"
+  ></textarea>
+
+  @if (addProductForm.get('descriptionAr')?.touched && addProductForm.get('descriptionAr')?.invalid) {
+    <div class="alert alert-danger d-flex align-items-start mt-2" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+        fill="currentColor" class="bi bi-exclamation-circle me-2 mt-1"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.55.55 0 0 1-1.1 0L7.1 4.995z"/>
+      </svg>
+
+      <div>
+        <ul class="mb-0 ps-3">
+          @if (addProductForm.get('descriptionAr')?.getError('required')) {
+            <li>Arabic description is required</li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+
+
+<!-- product price  -->
+ <div class="mb-3">
+  <label class="form-label">Price</label>
+
+  <input
+    type="number"
+    formControlName="price"
+    class="form-control"
+    placeholder="Price"
+  />
+
+  @if (addProductForm.get('price')?.touched && addProductForm.get('price')?.invalid) {
+    <div class="alert alert-danger d-flex align-items-start mt-2" role="alert">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+        fill="currentColor" class="bi bi-exclamation-circle me-2 mt-1"
+        viewBox="0 0 16 16">
+        <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"/>
+        <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.55.55 0 0 1-1.1 0L7.1 4.995z"/>
+      </svg>
+
+      <div>
+        <ul class="mb-0 ps-3">
+          @if (addProductForm.get('price')?.getError('required')) {
+            <li>Price is required</li>
+          }
+          @if (addProductForm.get('price')?.getError('min')) {
+            <li>Price must be greater than 0</li>
+          }
+        </ul>
+      </div>
+    </div>
+  }
+</div>
+
+<!-- product image url  -->
+<div class="mb-3">
+  <label class="form-label">Picture URL</label>
+
+  <input
+    type="text"
+    formControlName="pictureUrl"
+    class="form-control"
+    placeholder="Enter image URL"
+  />
+</div>
+
+
+<!-- product type  -->
+ <div class="mb-3">
+  <label class="form-label">Product Type</label>
+
+  <select formControlName="productTypeId" class="form-select">
+    <option value="">Select Type</option>
+
+    @for (type of productTypes; track type.id) {
+      <option [value]="type.id">{{ type.name }}</option>
+    }
+  </select>
+</div>
+
+
+<!-- product brand  -->
+ <div class="mb-3">
+  <label class="form-label">Product Brand</label>
+
+  <select formControlName="productBrandId" class="form-select">
+    <option value="">Select Brand</option>
+
+    @for (brand of productBrands; track brand.id) {
+      <option [value]="brand.id">{{ brand.name }}</option>
+    }
+  </select>
+</div>
+
+
+
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="addProductForm.invalid"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+</section>

@@ -12,4 +12,16 @@ export class ProductsService {
   getProductsBrands(){
     return this.httpClient.get(`${environment.baseURL}/api/Products/brands`)
   }
+
+  getProductsTypes(){
+    return this.httpClient.get(`${environment.baseURL}/api/Products/types`)
+  }
+
+  getSizes(){
+    return this.httpClient.get(`${environment.baseURL}/api/sizes`)
+  }
+
+  getColors(){
+    return this.httpClient.get(`${environment.baseURL}/api/colors`)
+  }
 }

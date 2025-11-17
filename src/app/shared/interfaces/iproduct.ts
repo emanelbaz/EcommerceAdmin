@@ -1,5 +1,6 @@
 import { IVariant } from "./ivariant";
 
+//what API returns when getting a product
 export interface IProduct {
 id:number;
 name:string;
