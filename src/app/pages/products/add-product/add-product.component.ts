@@ -1,7 +1,7 @@
 import { isPlatformBrowser } from '@angular/common';
 import { ProductsService } from './../../../core/services/products/products.service';
 import { Component, inject, PLATFORM_ID } from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
+import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
 import { IType } from '../../../shared/interfaces/itype';
 import { IBrand } from '../../../shared/interfaces/ibrand';
 
@@ -28,8 +28,18 @@ export class AddProductComponent {
     pictureUrl: new FormControl(''),
     productTypeId: new FormControl(null, Validators.required),
     productBrandId: new FormControl(null, Validators.required),
-    variants: new FormControl([])
+    variants: new FormArray([])
   });
+
+  createVariatn(): FormGroup {
+    return new FormGroup({
+      colorId: new FormControl(0, Validators.required),
+    sizeId: new FormControl(0, Validators.required),
+    price: new FormControl(0, [Validators.required, Validators.min(0)]),
+    stock: new FormControl(0, [Validators.required, Validators.min(0)]),
+    sku: new FormControl('', Validators.required)
+    });
+  }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
