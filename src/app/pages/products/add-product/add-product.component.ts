@@ -6,6 +6,7 @@ import { IType } from '../../../shared/interfaces/itype';
 import { IBrand } from '../../../shared/interfaces/ibrand';
 import { IColor } from '../../../shared/interfaces/icolor';
 import { ISize } from '../../../shared/interfaces/isize';
+import { ICreateProduct } from '../../../shared/interfaces/icreate-product';
 
 @Component({
   selector: 'app-add-product',
@@ -123,6 +124,46 @@ export class AddProductComponent {
   }
 
   submitForm(){
+    
+  if (this.addProductForm.invalid) {
+    this.addProductForm.markAllAsTouched();
+    return;
+  }
+
+  const productData: ICreateProduct = {
+    nameEn: this.addProductForm.value.nameEn!,
+    nameAr: this.addProductForm.value.nameAr!,
+    descriptionEn: this.addProductForm.value.descriptionEn!,
+    descriptionAr: this.addProductForm.value.descriptionAr!,
+    price: this.addProductForm.value.price!,
+    pictureUrl: this.addProductForm.value.pictureUrl!,
+    productTypeId: this.addProductForm.value.productTypeId!,
+    productBrandId: this.addProductForm.value.productBrandId!,
+
+    variants: this.variants.value.map((v: any) => ({
+      productId: 0,
+      colorId: v.colorId,
+      sizeId: v.sizeId,
+      price: v.price,
+      stock: v.stock,
+      sku: v.sku
+    }))
+  };
+
+
+    this.productsService.addProduct(productData).subscribe({
+      next:(res)=>{
+        console.log("Product created:", res);
+        alert("Product added successfully!");
+        this.addProductForm.reset();
+        this.variants.clear();
+
+      }, 
+      error:(err)=>{
+        console.error("Error creating product:", err);
+        alert("Failed to create product.");
+      }
+    })
 
   }
 }
