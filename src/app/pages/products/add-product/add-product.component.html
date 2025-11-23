@@ -223,6 +223,107 @@
 </div>
 
 
+<!-- variant section  -->
+
+<!-- Variants Section -->
+<div class="mt-4">
+  <h5 class="mb-3">Product Variants</h5>
+
+  <!-- Loop through all variants -->
+
+  @for(variant of variants.controls;let i = $index; track i) { 
+
+      <div
+    [formGroupName]="i"
+    class="card mb-3 border-primary"
+  >
+    <div class="card-body">
+
+      <h6 class="card-title mb-3">Variant {{ i + 1 }}</h6>
+
+      <!-- Color -->
+      <div class="mb-3">
+        <label class="form-label">Color</label>
+        <select formControlName="colorId" class="form-select">
+          <option value="">Select color</option>
+          @for(color of variantColors; track color.id){
+            <option [value]="color.id">{{color.nameAr}}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Size -->
+      <div class="mb-3">
+        <label class="form-label">Size</label>
+        <select formControlName="sizeId" class="form-select">
+          <option value="">Select size</option>
+          @for(size of variantSizes; track size.id){
+            <option [value]="size.id">{{size.name}}</option>
+          }
+        </select>
+      </div>
+
+      <!-- Price -->
+      <div class="mb-3">
+        <label class="form-label">Price</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="price"
+          placeholder="Variant price"
+        />
+      </div>
+
+      <!-- Stock -->
+      <div class="mb-3">
+        <label class="form-label">Stock</label>
+        <input
+          type="number"
+          class="form-control"
+          formControlName="stock"
+          placeholder="Variant stock"
+        />
+      </div>
+
+      <!-- SKU -->
+      <div class="mb-3">
+        <label class="form-label">SKU</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="sku"
+          placeholder="SKU"
+        />
+      </div>
+
+      <!-- Remove Button -->
+      <button
+        type="button"
+        class="btn btn-outline-danger w-100"
+        (click)="removeVariant(i)"
+      >
+        Remove Variant
+      </button>
+    </div>
+  </div>
+
+   }
+  
+
+
+  <!-- Add Variant Button -->
+  <button
+    type="button"
+    class="btn btn-primary w-100"
+    (click)="addVariant()"
+  >
+    + Add Variant
+  </button>
+</div>
+
+
+
+
 
 
       <button

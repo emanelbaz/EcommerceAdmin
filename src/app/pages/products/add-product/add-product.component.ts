@@ -4,6 +4,8 @@ import { Component, inject, PLATFORM_ID } from '@angular/core';
 import {FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
 import { IType } from '../../../shared/interfaces/itype';
 import { IBrand } from '../../../shared/interfaces/ibrand';
+import { IColor } from '../../../shared/interfaces/icolor';
+import { ISize } from '../../../shared/interfaces/isize';
 
 @Component({
   selector: 'app-add-product',
@@ -18,6 +20,8 @@ export class AddProductComponent {
 
   productTypes: IType[] = [];
   productBrands: IBrand[] = [];
+  variantColors: IColor[] = [];
+  variantSizes: ISize[] = [];
 
   addProductForm: FormGroup = new FormGroup({
     nameEn: new FormControl(null, [Validators.required, Validators.minLength(3)]),
@@ -31,7 +35,7 @@ export class AddProductComponent {
     variants: new FormArray([])
   });
 
-  createVariatn(): FormGroup {
+  createVariant(): FormGroup {
     return new FormGroup({
       colorId: new FormControl(0, Validators.required),
     sizeId: new FormControl(0, Validators.required),
@@ -39,6 +43,18 @@ export class AddProductComponent {
     stock: new FormControl(0, [Validators.required, Validators.min(0)]),
     sku: new FormControl('', Validators.required)
     });
+  }
+
+  get variants(): FormArray {
+    return this.addProductForm.get('variants') as FormArray;
+  };
+
+  addVariant(): void {
+    this.variants.push(this.createVariant());
+  }
+
+  removeVariant(index: number): void {
+    this.variants.removeAt(index);
   }
 
   ngOnInit(): void {
@@ -49,6 +65,8 @@ export class AddProductComponent {
 
       this.getProductsBrands();
       this.getProductsTypes();
+      this.getVariantColor();
+      this.getVariantSize();
     }
     
     
@@ -76,6 +94,32 @@ export class AddProductComponent {
         console.error('Error fetching product types:', error);
       },
     }); 
+  }
+
+  getVariantColor(): void {
+    this.productsService.getColors().subscribe({
+      next: (colors) => {
+        console.log(colors);
+        this.variantColors = colors as IColor[];
+      },
+      error: (error) => {
+        console.error('Error fetching variant colors:', error);
+      },
+    });
+
+  }
+
+  getVariantSize(): void {
+    this.productsService.getSizes().subscribe({
+      next: (sizes) => {
+        console.log(sizes);
+        this.variantSizes = sizes as ISize[];
+      },
+      error: (error) => {
+        console.error('Error fetching variant sizes:', error);
+      },
+    });
+
   }
 
   submitForm(){
