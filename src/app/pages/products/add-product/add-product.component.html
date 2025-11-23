@@ -231,7 +231,9 @@
 
   <!-- Loop through all variants -->
 
-  @for(variant of variants.controls;let i = $index; track i) { 
+  <div formArrayName="variants">
+
+      @for(variant of variants.controls;let i = $index; track i) { 
 
       <div
     [formGroupName]="i"
@@ -247,7 +249,7 @@
         <select formControlName="colorId" class="form-select">
           <option value="">Select color</option>
           @for(color of variantColors; track color.id){
-            <option [value]="color.id">{{color.nameAr}}</option>
+            <option [value]="color.id">{{color.nameEn}}</option>
           }
         </select>
       </div>
@@ -308,13 +310,15 @@
   </div>
 
    }
+  </div>
+
   
 
 
   <!-- Add Variant Button -->
   <button
     type="button"
-    class="btn btn-primary w-100"
+    class="btn btn-primary w-100 my-3"
     (click)="addVariant()"
   >
     + Add Variant
